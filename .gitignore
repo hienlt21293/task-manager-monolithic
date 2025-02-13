@@ -8,9 +8,6 @@ frontend/build/
 frontend/dist/
 backend/dist/
 
-# Environment variables
-frontend/.env
-backend/.env
 
 # Logs
 logs/

@@ -2,7 +2,7 @@
 
 A full-stack task management application with authentication, built using React (Frontend), Express (Backend), and PostgreSQL (Database).
 
-** Note: **
+**Note:**
 
 This repository is intended for practicing Docker and Docker Compose. It serves as a baseline for further exploration, such as breaking the application into microservices and deploying it with Kubernetes, among other improvements.
 

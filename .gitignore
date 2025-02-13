@@ -35,7 +35,7 @@ frontend/package-lock.json
 backend/package-lock.json
 
 # Public build artifacts
-frontend/public/
+frontend/build/
 
 # Docker-related files (if applicable)
 docker-compose.override.yml

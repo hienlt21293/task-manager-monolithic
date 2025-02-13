@@ -55,9 +55,8 @@ Backend: localhost:5000
 
 |  Method| Endpoint | Description| Auth Required?
 |--|--|--|--|
-| POST | /register  |  Register a new user|  ❌ No|
+|POST | /register  |  Register a new user|  ❌ No|
 |POST |/login | Login & get JWT Token| ❌ No
-|POST |/login |Login & get JWT Token |❌ No
 |GET |/tasks |Get user’s tasks |✅ Yes
 |POST |/tasks |Add a new task |✅ Yes
 |DELETE |/tasks/:id| Delete a task |✅ Yes

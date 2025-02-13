@@ -1,74 +1,67 @@
-1. Set up Project Stucture
-mkdir backend frontend database
+**Task Manager App 📝**
 
-2. Set up PostgreSQL in Docker
+A full-stack task management application with authentication, built using React (Frontend), Express (Backend), and PostgreSQL (Database).
 
-Create a docker-compose.yaml file in the root folder.
+  
 
-version: '3.8'
-services:
-  postgres:
-    image: postgres:15
-    container_name: taskmanager-db
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: taskmanager
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
+**📌 Features**
 
-volumes:
-  postgres-data:
+✔️ User Registration & Login (JWT Authentication)
 
-Start PostgreSQL
-docker compose up -d
+✔️ Create, View, and Delete Tasks
 
-3. Initialize the Database
-Inside the database/ folder, create an init.sql file:
+✔️ Secure API with Auth Middleware
 
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(255) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password TEXT NOT NULL
-);
+✔️ List All Users & Their Tasks 
 
-CREATE TABLE tasks (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    completed BOOLEAN DEFAULT false,
-    user_id INT REFERENCES users(id) ON DELETE CASCADE
-);
+✔️ Dockerized Frontend, Backend, PostgreSQL Database
 
-Apply the script 
+  
 
-psql -U postgres -h localhost -p 5432 -d taskmanager -f database/init.sql
+**🚀 Tech Stack**
 
+Frontend: React, React Router, Axios
 
-4. Set up backend
-cd backend
-npm init -y
+Backend: Express.js, PostgreSQL, bcrypt, JWT
 
-Install Dependencies
-npm install express pg bcryptjs jsonwebtoken dotenv cors bcrypt
+Database: PostgreSQL (Docker)
 
-Create backend/server.js (content included)
-Create .env File (content included)
+Deployment: Docker, Docker Compose
 
-5. Start backend
- node server.js 
+**🛠️ Setup Instructions**
+Run docker-compose up from root folder to start everything.
 
-6. Set up Frontend
+    docker-compose up --build -d
+You can also start Postgres from docker-compose, then manually start frontend and backend separately
 
-cd ../frontend
-npx create-react-app .
-npm install axios react-router-dom web-vitals
+    $ docker-compose -f 'docker-compose.yaml' up -d --build 'postgres' 
+    # from frontend folder
+    $ npm install
+    $ npm start
+    # from backend folder
+    $ npm start
+
+**🔌 API Endpoints**
+
+|  Method| Endpoint | Description| Auth Required?
+|--|--|--|--|
+| POST | /register  |  Register a new user|  ❌ No|
+|POST |/login | Login & get JWT Token| ❌ No
+|POST |/login |Login & get JWT Token |❌ No
+|GET |/tasks |Get user’s tasks |✅ Yes
+|POST |/tasks |Add a new task |✅ Yes
+|DELETE |/tasks/:id| Delete a task |✅ Yes
+|GET |/users |Get all users & tasks |✅ Yes
 
 
-Modify src/App.js (content included)
+  
 
-7. Start frontend
-npm start
+**🤝 Contributing**
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
+
+  
+
+**📝 License**
+
+This project is MIT Licensed.

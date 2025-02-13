@@ -3,15 +3,13 @@ import { BrowserRouter as Router, Route, Routes, Link, useLocation } from "react
 import axios from "axios";
 import Users from "./Users";
 
-function Home() {
+function Home({ token, setToken }) {
     const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [token, setToken] = useState(localStorage.getItem("token") || "");
 
-    // Fetch tasks when logged in
     useEffect(() => {
         if (token) {
             axios.get("http://localhost:5000/tasks", {
@@ -22,7 +20,6 @@ function Home() {
         }
     }, [token]);
 
-    // Register user
     const register = async () => {
         try {
             await axios.post("http://localhost:5000/register", { username, email, password });
@@ -32,18 +29,16 @@ function Home() {
         }
     };
 
-    // Login user
     const login = async () => {
         try {
             const res = await axios.post("http://localhost:5000/login", { email, password });
-            setToken(res.data.token);
+            setToken(res.data.token); // ✅ Update state
             localStorage.setItem("token", res.data.token);
         } catch (err) {
             alert("Invalid email or password");
         }
     };
 
-    // Add a task
     const addTask = async () => {
         if (!newTask) return;
         const res = await axios.post("http://localhost:5000/tasks", 
@@ -54,7 +49,6 @@ function Home() {
         setNewTask("");
     };
 
-    // Delete a task
     const deleteTask = async (id) => {
         await axios.delete(`http://localhost:5000/tasks/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
@@ -62,9 +56,8 @@ function Home() {
         setTasks(tasks.filter(task => task.id !== id));
     };
 
-    // Logout
     const logout = () => {
-        setToken("");
+        setToken(""); // ✅ Clear token from state
         localStorage.removeItem("token");
     };
 
@@ -106,29 +99,30 @@ function Home() {
     );
 }
 
-// Navigation component (works for all pages)
-function Navigation() {
+// ✅ Updated Navigation component
+function Navigation({ token }) {
     const location = useLocation();
-    const token = localStorage.getItem("token");
 
     return (
         <nav>
-            {/* Show "Home" only on /users */}
+            {/* Show "Home" only when on /users */}
             {location.pathname === "/users" && <Link to="/">Home</Link>}
 
-            {/* Show "View Users" when logged in */}
+            {/* Show "View Users" only when logged in */}
             {token && <Link to="/users" style={{ marginLeft: "10px" }}>View Users</Link>}
         </nav>
     );
 }
 
-// Main App Component
+// ✅ Manage token in App.js and pass it as prop
 function App() {
+    const [token, setToken] = useState(localStorage.getItem("token") || "");
+
     return (
         <Router>
-            <Navigation />  {/* ✅ Always show navigation */}
+            <Navigation token={token} />  {/* ✅ Pass token as prop */}
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home token={token} setToken={setToken} />} />
                 <Route path="/users" element={<Users />} />
             </Routes>
         </Router>

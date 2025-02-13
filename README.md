@@ -32,14 +32,24 @@ Deployment: Docker, Docker Compose
 Run docker-compose up from root folder to start everything.
 
     docker-compose up --build -d
+
+Frontend: localhost:80
+Backend: localhost:5000
+
+---
+
+
 You can also start Postgres from docker-compose, then manually start frontend and backend separately
 
-    $ docker-compose -f 'docker-compose.yaml' up -d --build 'postgres' 
+    docker-compose -f 'docker-compose.yaml' up -d --build 'postgres' 
     # from frontend folder
-    $ npm install
-    $ npm start
+    npm install
+    npm start
     # from backend folder
-    $ npm start
+    npm install
+    npm start
+Frontend: localhost:3000
+Backend: localhost:5000
 
 **🔌 API Endpoints**
 

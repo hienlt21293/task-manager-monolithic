@@ -25,7 +25,8 @@ A full-stack task management application with authentication, built using React 
 ✔️ Dockerized Frontend, Backend, PostgreSQL Database
 
   
-  
+<br/>
+<br/>  
 
 **🚀 Tech Stack**
 
@@ -36,6 +37,9 @@ Backend: Express.js, PostgreSQL, bcrypt, JWT
 Database: PostgreSQL (Docker)
 
 Deployment: Docker, Docker Compose
+
+<br/>
+<br/>
 
 **🛠️ Setup Instructions**
 Run docker-compose up from root folder to start everything.
@@ -63,7 +67,8 @@ Frontend: localhost:3000
 Backend: localhost:5000
 
   
-
+<br/>
+<br/>
 **🔌 API Endpoints**
 
 |  Method| Endpoint | Description| Auth Required?
@@ -75,15 +80,15 @@ Backend: localhost:5000
 |DELETE |/tasks/:id| Delete a task |✅ Yes
 |GET |/users |Get all users & tasks |✅ Yes
 
-  
-  
+<br/>
+<br/>  
 **🤝 Contributing**
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
 
   
-  
-
+<br/>
+<br/>
 **📝 License**
 
 This project is MIT Licensed.

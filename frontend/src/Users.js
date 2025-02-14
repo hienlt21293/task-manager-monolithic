@@ -4,9 +4,10 @@ import axios from "axios";
 function Users() {
     const [users, setUsers] = useState([]);
     const token = localStorage.getItem("token");
+    const API_BASE_URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        axios.get("http://localhost:5000/users", {
+        axios.get(`${API_BASE_URL}/users`, {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => setUsers(res.data))

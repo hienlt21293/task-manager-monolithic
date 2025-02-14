@@ -9,10 +9,12 @@ function Home({ token, setToken }) {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 
     useEffect(() => {
         if (token) {
-            axios.get("http://localhost:5000/tasks", {
+            axios.get(`${API_BASE_URL}/tasks`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             .then(res => setTasks(res.data))
@@ -22,7 +24,7 @@ function Home({ token, setToken }) {
 
     const register = async () => {
         try {
-            await axios.post("http://localhost:5000/register", { username, email, password });
+            await axios.post(`${API_BASE_URL}/register`, { username, email, password });
             alert("User registered! Now log in.");
         } catch (err) {
             alert(err.response.data.error);
@@ -31,7 +33,7 @@ function Home({ token, setToken }) {
 
     const login = async () => {
         try {
-            const res = await axios.post("http://localhost:5000/login", { email, password });
+            const res = await axios.post(`${API_BASE_URL}/login`, { email, password });
             setToken(res.data.token); // ✅ Update state
             localStorage.setItem("token", res.data.token);
         } catch (err) {
@@ -41,7 +43,7 @@ function Home({ token, setToken }) {
 
     const addTask = async () => {
         if (!newTask) return;
-        const res = await axios.post("http://localhost:5000/tasks", 
+        const res = await axios.post(`${API_BASE_URL}/tasks`, 
             { title: newTask, completed: false },
             { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -50,7 +52,7 @@ function Home({ token, setToken }) {
     };
 
     const deleteTask = async (id) => {
-        await axios.delete(`http://localhost:5000/tasks/${id}`, {
+        await axios.delete(`${API_BASE_URL}/tasks/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         });
         setTasks(tasks.filter(task => task.id !== id));
